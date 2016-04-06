@@ -93,8 +93,8 @@ static const CGFloat FXFormFieldLabelSpacing = 5;
 static const CGFloat FXFormFieldMinLabelWidth = 97;
 static const CGFloat FXFormFieldMaxLabelWidth = 240;
 static const CGFloat FXFormFieldMinFontSize = 12;
-static const CGFloat FXFormFieldPaddingLeft = 10;
-static const CGFloat FXFormFieldPaddingRight = 10;
+static const CGFloat FXFormFieldPaddingLeft = 15;
+static const CGFloat FXFormFieldPaddingRight = 15;
 static const CGFloat FXFormFieldPaddingTop = 12;
 static const CGFloat FXFormFieldPaddingBottom = 12;
 
