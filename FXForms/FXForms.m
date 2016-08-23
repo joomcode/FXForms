@@ -2963,6 +2963,17 @@ static void FXFormPreprocessFieldDictionary(NSMutableDictionary *dictionary)
     }
 }
 
+- (BOOL)hasEditableCellsBelowCell:((UITableViewCell <FXFormFieldCell> *)cell {
+    if (!cell) {
+        return NO;
+    }
+    if ([cell canBecomeFirstResponder]) {
+        return YES;
+    } else {
+        return [self hasEditableCellsBelowCell:cell.nextCell];
+    }
+}
+
 - (BOOL)textFieldShouldBeginEditing:(__unused UITextField *)textField
 {
     //welcome to hacksville, population: you
@@ -2971,7 +2982,7 @@ static void FXFormPreprocessFieldDictionary(NSMutableDictionary *dictionary)
         //get return key type
         UIReturnKeyType returnKeyType = UIReturnKeyDone;
         UITableViewCell <FXFormFieldCell> *nextCell = self.nextCell;
-        if ([nextCell canBecomeFirstResponder])
+        if ([self hasEditableCellsBelowCell:nextCell])
         {
             returnKeyType = UIReturnKeyNext;
         }
@@ -2991,11 +3002,22 @@ static void FXFormPreprocessFieldDictionary(NSMutableDictionary *dictionary)
     [self updateFieldValue];
 }
 
+- (void)activateNextCellRecursively:(UITableViewCell <FXFormFieldCell> *)cell {
+    if (!cell) {
+        return;
+    }
+    if ([cell canBecomeFirstResponder]) {
+        [cell becomeFirstResponder];
+        return;
+    }
+    [self activateNextCellRecursively:cell.nextCell];
+}
+
 - (BOOL)textFieldShouldReturn:(__unused UITextField *)textField
 {
     if (self.textField.returnKeyType == UIReturnKeyNext)
     {
-        [self.nextCell becomeFirstResponder];
+        [self activateNextCellRecursively:self.nextCell];
     }
     else
     {
