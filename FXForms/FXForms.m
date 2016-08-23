@@ -2346,18 +2346,6 @@ static void FXFormPreprocessFieldDictionary(NSMutableDictionary *dictionary)
     return NO;
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
-    //dismiss keyboard
-    [FXFormsFirstResponder(self.tableView) resignFirstResponder];
-    
-    //forward to delegate
-    if ([self.delegate respondsToSelector:_cmd])
-    {
-        [self.delegate scrollViewWillBeginDragging:scrollView];
-    }
-}
-
 #pragma mark -
 #pragma mark Keyboard events
 
