@@ -2963,7 +2963,7 @@ static void FXFormPreprocessFieldDictionary(NSMutableDictionary *dictionary)
     }
 }
 
-- (BOOL)hasEditableCellsBelowCell:((UITableViewCell <FXFormFieldCell> *)cell {
+- (BOOL)hasEditableCellsBelowCell:(FXFormBaseCell *)cell {
     if (!cell) {
         return NO;
     }
@@ -3002,7 +3002,7 @@ static void FXFormPreprocessFieldDictionary(NSMutableDictionary *dictionary)
     [self updateFieldValue];
 }
 
-- (void)activateNextCellRecursively:(UITableViewCell <FXFormFieldCell> *)cell {
+- (void)activateNextCellRecursively:(FXFormBaseCell *)cell {
     if (!cell) {
         return;
     }
